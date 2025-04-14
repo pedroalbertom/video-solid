@@ -1,9 +1,23 @@
+import { Product } from "../../../entities/product";
 import { IProductRepository } from "../../../repositories/product/product.repository";
-import { BuyOutputDto, IProductService, ListOutputDto, SellOutputDto } from "../product.service";
+import { BuyOutputDto, CreateOutputDto, IProductService, ListOutputDto, SellOutputDto } from "../product.service";
 
 export class ProductService implements IProductService{
 
     private constructor(readonly repository: IProductRepository){}
+
+    public async create(name: string, price: number): Promise<CreateOutputDto> {
+        const aProduct = Product.create(name, price)
+
+        await this.repository.save(aProduct)
+
+        const output: CreateOutputDto = {
+            id: aProduct.id,
+            balance: aProduct.quantity
+        }
+
+        return output
+    }
 
     public static build(repository: IProductRepository){
         return new ProductService(repository)
