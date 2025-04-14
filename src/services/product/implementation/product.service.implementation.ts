@@ -1,5 +1,5 @@
-import { IProductRepository } from "../../repositories/product/product.repository";
-import { BuyOutputDto, IProductService, ListOutputDto, SellOutputDto } from "./product.service";
+import { IProductRepository } from "../../../repositories/product/product.repository";
+import { BuyOutputDto, IProductService, ListOutputDto, SellOutputDto } from "../product.service";
 
 export class ProductService implements IProductService{
 
