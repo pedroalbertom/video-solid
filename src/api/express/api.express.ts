@@ -28,9 +28,7 @@ export class ApiExpress implements Api {
 
     private printRoutes() {
         const routes = this.app.router.stack
-            .filter((route: any) => {
-                route.route
-            })
+            .filter((route: any) => route.route)
             .map((route: any) => ({
                 path: route.route.path,
                 method: route.route.stack[0].method
