@@ -2,9 +2,9 @@ import { Product } from "../../../entities/product";
 import { IProductRepository } from "../../../repositories/product/product.repository";
 import { BuyOutputDto, CreateOutputDto, IProductService, ListOutputDto, SellOutputDto } from "../product.service";
 
-export class ProductService implements IProductService{
+export class ProductService implements IProductService {
 
-    private constructor(readonly repository: IProductRepository){}
+    private constructor(readonly repository: IProductRepository) { }
 
     public async create(name: string, price: number): Promise<CreateOutputDto> {
         const aProduct = Product.create(name, price)
@@ -19,14 +19,14 @@ export class ProductService implements IProductService{
         return output
     }
 
-    public static build(repository: IProductRepository){
+    public static build(repository: IProductRepository) {
         return new ProductService(repository)
     }
 
     public async sell(id: string, amount: number): Promise<SellOutputDto> {
         const aProduct = await this.repository.find(id)
-        
-        if(!aProduct) throw new Error(`O produto ${id} não foi encontrado`)
+
+        if (!aProduct) throw new Error(`O produto ${id} não foi encontrado`)
 
         aProduct.sell(amount)
 
@@ -42,8 +42,8 @@ export class ProductService implements IProductService{
 
     public async buy(id: string, amount: number): Promise<BuyOutputDto> {
         const aProduct = await this.repository.find(id)
-        
-        if(!aProduct) throw new Error(`O produto ${id} não foi encontrado`)
+
+        if (!aProduct) throw new Error(`O produto ${id} não foi encontrado`)
 
         aProduct.buy(amount)
 

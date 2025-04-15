@@ -33,7 +33,7 @@ export class ApiExpress implements Api {
                 path: route.route.path,
                 method: route.route.stack[0].method
             }))
-        
+
         console.log(routes)
     }
 }

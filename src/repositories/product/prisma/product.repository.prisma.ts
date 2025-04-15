@@ -27,7 +27,7 @@ export class ProductRepositoryPrisma implements IProductRepository {
         const aProducts = await this.prisma.product.findMany()
 
         const products: Product[] = aProducts.map(p => {
-            const {id, name, price, quantity} = p
+            const { id, name, price, quantity } = p
             return Product.with(id, name, price, quantity)
         })
 
@@ -55,7 +55,7 @@ export class ProductRepositoryPrisma implements IProductRepository {
 
         if (!aProduct) return null
 
-        const {name, price, quantity} = aProduct
+        const { name, price, quantity } = aProduct
 
         const product = Product.with(id, name, price, quantity)
 
