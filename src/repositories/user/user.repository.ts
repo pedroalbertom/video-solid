@@ -5,4 +5,5 @@ export interface IUserRepository {
     list(): Promise<User[]>,
     update(user: User): Promise<void>,
     find(id: string): Promise<User | null>
+    delete(id: string): Promise<void>
 }
