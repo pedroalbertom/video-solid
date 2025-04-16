@@ -29,22 +29,22 @@ export class UserController {
         res.status(201).json(data).send()
     }
 
-    public async list(req: Request, res: Response){
+    public async list(req: Request, res: Response) {
         const aRepository = UserRepositoryPrisma.build(prisma)
         const aService = UserService.build(aRepository)
 
         const output = await aService.list()
 
         const data = {
-            products: output.users
+            users: output.users
         }
 
         res.status(201).json(data).send()
     }
 
-    public async update(req: Request, res: Response){
+    public async update(req: Request, res: Response) {
         const id = req.params.toString()
-        
+
         const aRepository = UserRepositoryPrisma.build(prisma)
         const aService = UserService.build(aRepository)
 
@@ -57,11 +57,11 @@ export class UserController {
             email: output.email,
             password: output.password
         }
-        
+
         res.status(201).json(data).send()
     }
 
-    public async delete(req: Request, res: Response){
+    public async delete(req: Request, res: Response) {
 
     }
 }
