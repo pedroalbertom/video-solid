@@ -50,18 +50,19 @@ export class User {
     }
 
     public set firstName(firstName: string) {
-        this.firstName = firstName
+        this.props.firstName = firstName
     }
 
     public set lastName(lastName: string) {
-        this.lastName = lastName
+        this.props.lastName = lastName
     }
 
     public set email(email: string) {
-        this.email = email
+        this.props.email = email
     }
 
     public set password(password: string) {
-        this.password = password
+        this.props.password = password
     }
+
 }

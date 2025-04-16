@@ -39,11 +39,11 @@ export class UserController {
             users: output.users
         }
 
-        res.status(201).json(data).send()
+        res.status(200).json(data).send()
     }
 
     public async update(req: Request, res: Response) {
-        const id = req.params.toString()
+        const id = req.params.id
 
         const aRepository = UserRepositoryPrisma.build(prisma)
         const aService = UserService.build(aRepository)
@@ -58,10 +58,16 @@ export class UserController {
             password: output.password
         }
 
-        res.status(201).json(data).send()
+        res.status(200).json(data).send()
     }
 
     public async delete(req: Request, res: Response) {
+        const id = req.params.id
 
+        const aRepository = UserRepositoryPrisma.build(prisma)
+        const aService = UserService.build(aRepository)
+
+        await aService.delete(id)
+        res.status(200).json({ msg: "Usuário deletado com sucesso!" }).send()
     }
 }

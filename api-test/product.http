@@ -39,3 +39,14 @@ Content-Type: application/json
     "email": "pedro@gmail.com",
     "password": "123"
 }
+
+###
+PUT http://localhost:8000/users/80c6f2d8-09ed-4f65-ba60-9f45a2381aad
+Content-Type: application/json
+
+{
+    "firstName": "pedroaasdasdasdfasdfasd"
+}
+
+###
+DELETE http://localhost:8000/users/80c6f2d8-09ed-4f65-ba60-9f45a2381aad

@@ -57,7 +57,7 @@ export class UserService implements IUserService {
         if (data.password) user.password = data.password
 
 
-        await this.userRepository.save(user)
+        await this.userRepository.update(user)
 
         return {
             id: user.id,
