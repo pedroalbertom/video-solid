@@ -19,6 +19,14 @@ export class ApiExpress implements Api {
         this.app.post(path, handle)
     }
 
+    public async addPutRoute(path: string, handle: (req: Request, res: Response) => Promise<void>): Promise<void> {
+        this.app.put(path, handle)
+    }
+
+    public async addDeleteRoute(path: string, handle: (req: Request, res: Response) => Promise<void>): Promise<void> {
+        this.app.delete(path, handle)
+    }
+
     public async start(port: number): Promise<void> {
         this.app.listen(port, () => {
             console.log(`Server running on ${port}`)
