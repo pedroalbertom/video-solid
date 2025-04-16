@@ -29,23 +29,39 @@ export class User {
         })
     }
 
-    public get id(){
+    public get id() {
         return this.props.id
     }
 
-    public get firstName(){
+    public get firstName() {
         return this.props.firstName
     }
 
-    public get lastName(){
+    public get lastName() {
         return this.props.lastName
     }
 
-    public get email(){
+    public get email() {
         return this.props.email
     }
 
-    public get password(){
+    public get password() {
         return this.props.password
+    }
+
+    public set firstName(firstName: string) {
+        this.firstName = firstName
+    }
+
+    public set lastName(lastName: string) {
+        this.lastName = lastName
+    }
+
+    public set email(email: string) {
+        this.email = email
+    }
+
+    public set password(password: string) {
+        this.password = password
     }
 }
