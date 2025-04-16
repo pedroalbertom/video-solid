@@ -15,9 +15,20 @@ datasource db {
 }
 
 model Product {
-  @@map("products")
   id       String @id
   name     String
   price    Float
   quantity Int
+
+  @@map("products")
+}
+
+model User {
+  id        String @id
+  firstName String
+  lastName  String
+  email     String
+  password  String
+
+  @@map("users")
 }
