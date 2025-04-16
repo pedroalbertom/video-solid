@@ -18,9 +18,7 @@ export class ProductRepositoryPrisma implements IProductRepository {
             quantity: product.quantity
         }
 
-        await this.prisma.product.create({
-            data,
-        })
+        await this.prisma.product.create({ data })
     }
 
     public async list(): Promise<Product[]> {
