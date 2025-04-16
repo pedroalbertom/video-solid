@@ -6,6 +6,10 @@ export class ProductService implements IProductService {
 
     private constructor(readonly repository: IProductRepository) { }
 
+    public static build(repository: IProductRepository) {
+        return new ProductService(repository)
+    }
+
     public async create(name: string, price: number): Promise<CreateOutputDto> {
         const aProduct = Product.create(name, price)
 
@@ -17,10 +21,6 @@ export class ProductService implements IProductService {
         }
 
         return output
-    }
-
-    public static build(repository: IProductRepository) {
-        return new ProductService(repository)
     }
 
     public async sell(id: string, amount: number): Promise<SellOutputDto> {
