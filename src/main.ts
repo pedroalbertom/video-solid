@@ -1,12 +1,16 @@
 import { ApiExpress } from "./api/express/api.express";
-import { registerRoutes } from "./routes/routes";
+import { ApiFastify } from "./api/fastify/api.fastify";
+import { registerRoutesExpress, registerRoutesFastify } from "./routes/routes";
 
 async function main() {
-    const api = ApiExpress.build()
+    const apiExpress = ApiExpress.build()
+    const apiFastify = ApiFastify.build()
 
-    await registerRoutes(api)
+    await registerRoutesExpress(apiExpress)
+    await registerRoutesFastify(apiFastify)
 
-    await api.start(8000)
+    await apiExpress.start(8000)
+    await apiExpress.start(8001)
 }
 
 main()

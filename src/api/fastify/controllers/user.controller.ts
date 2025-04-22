@@ -3,14 +3,14 @@ import { UserRepositoryPrisma } from "../../../repositories/user/prisma/user.rep
 import { UserService } from "../../../services/user/implementation/user.service.implementation";
 import { prisma } from "../../../util/prisma.util";
 
-export class UserController {
+export class UserControllerFastify {
 
     private constructor(private service: UserService) { }
 
     public static build() {
         const aRepository = UserRepositoryPrisma.build(prisma);
         const aService = UserService.build(aRepository);
-        return new UserController(aService);
+        return new UserControllerFastify(aService);
     }
 
     public async create(req: FastifyRequest, reply: FastifyReply) {

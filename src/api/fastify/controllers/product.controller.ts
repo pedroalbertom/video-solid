@@ -3,14 +3,14 @@ import { ProductRepositoryPrisma } from "../../../repositories/product/prisma/pr
 import { prisma } from "../../../util/prisma.util";
 import { ProductService } from "../../../services/product/implementation/product.service.implementation";
 
-export class ProductController {
+export class ProductControllerFastify {
 
     private constructor(private service: ProductService) { }
 
     public static build() {
         const aRepository = ProductRepositoryPrisma.build(prisma);
         const aService = ProductService.build(aRepository);
-        return new ProductController(aService);
+        return new ProductControllerFastify(aService);
     }
 
     public async create(req: FastifyRequest, reply: FastifyReply) {

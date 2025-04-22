@@ -6,32 +6,23 @@ export class ApiFastify implements Api {
 
     public static build(): ApiFastify {
         const app = Fastify();
-        app.register(require('@fastify/formbody'));
         return new ApiFastify(app);
     }
 
     public async addGetRoute(path: string, handle: (req: FastifyRequest, reply: FastifyReply) => Promise<void>): Promise<void> {
-        this.app.get(path, async (req, reply) => {
-            await handle(req, reply);
-        });
+        this.app.get(path, handle);
     }
 
     public async addPostRoute(path: string, handle: (req: FastifyRequest, reply: FastifyReply) => Promise<void>): Promise<void> {
-        this.app.post(path, async (req, reply) => {
-            await handle(req, reply);
-        });
+        this.app.post(path, handle);
     }
 
     public async addPutRoute(path: string, handle: (req: FastifyRequest, reply: FastifyReply) => Promise<void>): Promise<void> {
-        this.app.put(path, async (req, reply) => {
-            await handle(req, reply);
-        });
+        this.app.put(path, handle);
     }
 
     public async addDeleteRoute(path: string, handle: (req: FastifyRequest, reply: FastifyReply) => Promise<void>): Promise<void> {
-        this.app.delete(path, async (req, reply) => {
-            await handle(req, reply);
-        });
+        this.app.delete(path, handle);
     }
 
     public async start(port: number): Promise<void> {
