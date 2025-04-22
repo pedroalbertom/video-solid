@@ -1,4 +1,4 @@
-import { ApiExpress } from "../api.express";
+import { ApiExpress } from "../express/api.express";
 import { registerProductRoutes } from "./product.routes";
 import { registerUserRoutes } from "./user.routes";
 

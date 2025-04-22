@@ -1,5 +1,5 @@
-import { ApiExpress } from "../api.express";
-import { UserController } from "../controllers/user.controller";
+import { ApiExpress } from "../express/api.express";
+import { UserController } from "../express/controllers/user.controller";
 
 export async function registerUserRoutes(api: ApiExpress) {
     const controller = UserController.build();
