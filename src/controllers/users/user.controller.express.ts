@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IUserController } from "./user.controller";
 import { IUserService } from "../../services/user/user.service";
-import { userService } from "../../util/repository.util";
+import { userService } from "../../util/repository.factory";
 
 export class UserControllerExpress implements IUserController {
 

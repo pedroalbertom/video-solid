@@ -2,7 +2,7 @@ import { ProductRepositoryPrisma } from "../repositories/product/product.reposit
 import { UserRepositoryPrisma } from "../repositories/user/user.repository.prisma";
 import { ProductService } from "../services/product/product.service.implementation";
 import { UserService } from "../services/user/user.service.implementation";
-import { prisma } from "./prisma.util";
+import { prisma } from "./prisma.factory";
 
 const userRepository = UserRepositoryPrisma.build(prisma);
 export const userService = UserService.build(userRepository)

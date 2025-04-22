@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import { IUserController } from "./user.controller";
 import { IUserService } from "../../services/user/user.service";
-import { userService } from "../../util/repository.util";
+import { userService } from "../../util/repository.factory";
 
 export class UserControllerFastify implements IUserController {
 
