@@ -4,11 +4,8 @@ import { prisma } from "../../../util/prisma.util";
 import { ProductService } from "../../../services/product/implementation/product.service.implementation";
 
 export class ProductController {
-    private service: ProductService;
 
-    private constructor(service: ProductService) {
-        this.service = service;
-    }
+    private constructor(private service: ProductService) { }
 
     public static build() {
         const aRepository = ProductRepositoryPrisma.build(prisma);

@@ -4,11 +4,8 @@ import { UserService } from "../../../services/user/implementation/user.service.
 import { prisma } from "../../../util/prisma.util";
 
 export class UserController {
-    private service: UserService;
 
-    private constructor(service: UserService) {
-        this.service = service;
-    }
+    private constructor(private service: UserService) { }
 
     public static build() {
         const aRepository = UserRepositoryPrisma.build(prisma);
@@ -62,6 +59,7 @@ export class UserController {
         const id = req.params.id;
 
         await this.service.delete(id);
+
         res.status(200).json({ msg: "Usuário deletado com sucesso!" });
     }
 }
