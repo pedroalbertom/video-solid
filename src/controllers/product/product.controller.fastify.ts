@@ -1,7 +1,7 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { ProductRepositoryPrisma } from "../../../repositories/product/prisma/product.repository.prisma";
-import { prisma } from "../../../util/prisma.util";
-import { ProductService } from "../../../services/product/implementation/product.service.implementation";
+import { ProductRepositoryPrisma } from "../../repositories/product/prisma/product.repository.prisma";
+import { prisma } from "../../util/prisma.util";
+import { ProductService } from "../../services/product/implementation/product.service.implementation";
 
 export class ProductControllerFastify {
 

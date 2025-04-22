@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { UserRepositoryPrisma } from "../../../repositories/user/prisma/user.repository.prisma";
-import { UserService } from "../../../services/user/implementation/user.service.implementation";
-import { prisma } from "../../../util/prisma.util";
+import { UserRepositoryPrisma } from "../../repositories/user/prisma/user.repository.prisma";
+import { UserService } from "../../services/user/implementation/user.service.implementation";
+import { prisma } from "../../util/prisma.util";
 
 export class UserControllerExpress {
 

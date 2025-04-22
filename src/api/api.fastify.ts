@@ -1,4 +1,4 @@
-import { Api } from "../api";
+import { Api } from "./api";
 import Fastify, { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 
 export class ApiFastify implements Api {

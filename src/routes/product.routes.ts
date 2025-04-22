@@ -1,7 +1,7 @@
-import { ApiExpress } from "../api/express/api.express";
-import { ApiFastify } from "../api/fastify/api.fastify";
-import { ProductControllerExpress } from "../api/express/controllers/product.controller";
-import { ProductControllerFastify } from "../api/fastify/controllers/product.controller";
+import { ApiExpress } from "../api/api.express";
+import { ApiFastify } from "../api/api.fastify";
+import { ProductControllerExpress } from "../controllers/product/product.controller.express";
+import { ProductControllerFastify } from "../controllers/product/product.controller.fastify";
 
 export async function registerProductRoutesExpress(api: ApiExpress) {
     const controller = ProductControllerExpress.build();

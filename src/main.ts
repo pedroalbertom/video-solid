@@ -1,5 +1,5 @@
-import { ApiExpress } from "./api/express/api.express";
-import { ApiFastify } from "./api/fastify/api.fastify";
+import { ApiExpress } from "./api/api.express";
+import { ApiFastify } from "./api/api.fastify";
 import { registerRoutesExpress, registerRoutesFastify } from "./routes/routes";
 
 async function main() {
