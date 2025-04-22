@@ -4,76 +4,68 @@ import { prisma } from "../../../util/prisma.util";
 import { ProductService } from "../../../services/product/implementation/product.service.implementation";
 
 export class ProductController {
+    private service: ProductService;
 
-    private constructor() { }
+    private constructor(service: ProductService) {
+        this.service = service;
+    }
 
     public static build() {
-        return new ProductController()
+        const aRepository = ProductRepositoryPrisma.build(prisma);
+        const aService = ProductService.build(aRepository);
+        return new ProductController(aService);
     }
 
     public async create(req: Request, res: Response) {
-        const { name, price } = req.body
+        const { name, price } = req.body;
 
-        const aRepository = ProductRepositoryPrisma.build(prisma)
-        const aService = ProductService.build(aRepository)
-
-        const output = await aService.create(name, price)
+        const output = await this.service.create(name, price);
 
         const data = {
             id: output.id,
             name,
             price,
-            balance: output.balance
-        }
+            balance: output.balance,
+        };
 
-        res.status(201).json(data).send()
+        res.status(201).json(data);
     }
 
     public async list(req: Request, res: Response) {
-        const aRepository = ProductRepositoryPrisma.build(prisma)
-        const aService = ProductService.build(aRepository)
-
-        const output = await aService.list()
+        const output = await this.service.list();
 
         const data = {
-            products: output.products
-        }
+            products: output.products,
+        };
 
-        res.status(200).json(data).send()
+        res.status(200).json(data);
     }
 
     public async buy(req: Request, res: Response) {
-        const { id } = req.params
-        const { amount } = req.body
+        const { id } = req.params;
+        const { amount } = req.body;
 
-        const aRepository = ProductRepositoryPrisma.build(prisma)
-        const aService = ProductService.build(aRepository)
-
-        const output = await aService.buy(id, amount)
+        const output = await this.service.buy(id, amount);
 
         const data = {
             id: output.id,
-            balance: output.balance
-        }
+            balance: output.balance,
+        };
 
-        res.status(200).json(data).send()
+        res.status(200).json(data);
     }
 
     public async sell(req: Request, res: Response) {
-        const { id } = req.params
-        const { amount } = req.body
+        const { id } = req.params;
+        const { amount } = req.body;
 
-        const aRepository = ProductRepositoryPrisma.build(prisma)
-        const aService = ProductService.build(aRepository)
-
-        const output = await aService.sell(id, amount)
+        const output = await this.service.sell(id, amount);
 
         const data = {
             id: output.id,
-            balance: output.balance
-        }
+            balance: output.balance,
+        };
 
-        res.status(200).json(data).send()
+        res.status(200).json(data);
     }
-
 }

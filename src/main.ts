@@ -1,6 +1,5 @@
 import { ApiExpress } from "./api/express/api.express";
-import { ProductController } from "./api/express/controllers/product.controller";
-import { registerRoutes } from "./api/express/routes";
+import { registerRoutes } from "./api/express/routes/routes";
 
 async function main() {
     const api = ApiExpress.build()

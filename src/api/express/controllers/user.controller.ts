@@ -4,19 +4,22 @@ import { UserService } from "../../../services/user/implementation/user.service.
 import { prisma } from "../../../util/prisma.util";
 
 export class UserController {
-    private constructor() { }
+    private service: UserService;
+
+    private constructor(service: UserService) {
+        this.service = service;
+    }
 
     public static build() {
-        return new UserController()
+        const aRepository = UserRepositoryPrisma.build(prisma);
+        const aService = UserService.build(aRepository);
+        return new UserController(aService);
     }
 
     public async create(req: Request, res: Response) {
-        const { firstName, lastName, email, password } = req.body
+        const { firstName, lastName, email, password } = req.body;
 
-        const aRepository = UserRepositoryPrisma.build(prisma)
-        const aService = UserService.build(aRepository)
-
-        const output = await aService.create(firstName, lastName, email, password)
+        const output = await this.service.create(firstName, lastName, email, password);
 
         const data = {
             id: output.id,
@@ -24,31 +27,25 @@ export class UserController {
             lastName,
             email,
             password
-        }
+        };
 
-        res.status(201).json(data).send()
+        res.status(201).json(data);
     }
 
     public async list(req: Request, res: Response) {
-        const aRepository = UserRepositoryPrisma.build(prisma)
-        const aService = UserService.build(aRepository)
-
-        const output = await aService.list()
+        const output = await this.service.list();
 
         const data = {
             users: output.users
-        }
+        };
 
-        res.status(200).json(data).send()
+        res.status(200).json(data);
     }
 
     public async update(req: Request, res: Response) {
-        const id = req.params.id
+        const id = req.params.id;
 
-        const aRepository = UserRepositoryPrisma.build(prisma)
-        const aService = UserService.build(aRepository)
-
-        const output = await aService.update(id, req.body)
+        const output = await this.service.update(id, req.body);
 
         const data = {
             id: output.id,
@@ -56,18 +53,15 @@ export class UserController {
             lastName: output.lastName,
             email: output.email,
             password: output.password
-        }
+        };
 
-        res.status(200).json(data).send()
+        res.status(200).json(data);
     }
 
     public async delete(req: Request, res: Response) {
-        const id = req.params.id
+        const id = req.params.id;
 
-        const aRepository = UserRepositoryPrisma.build(prisma)
-        const aService = UserService.build(aRepository)
-
-        await aService.delete(id)
-        res.status(200).json({ msg: "Usuário deletado com sucesso!" }).send()
+        await this.service.delete(id);
+        res.status(200).json({ msg: "Usuário deletado com sucesso!" });
     }
 }
