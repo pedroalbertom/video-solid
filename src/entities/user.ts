@@ -1,10 +1,4 @@
-export type UserProps = {
-    id: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string
-}
+import { UserProps } from "../types/user.types"
 
 export class User {
     private constructor(readonly props: UserProps) { }

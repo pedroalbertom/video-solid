@@ -1,9 +1,4 @@
-export type ProductProps = {
-    id: string,
-    name: string,
-    price: number,
-    quantity: number
-}
+import { ProductProps } from "../types/product.types"
 
 export class Product {
     private constructor(readonly props: ProductProps) { }
