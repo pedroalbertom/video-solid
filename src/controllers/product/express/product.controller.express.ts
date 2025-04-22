@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IProductController } from "../product.controller";
 import { IProductService } from "../../../services/product/product.service";
-import { productService } from "../../../util/repository.factory";
+import { productService } from "../../../util/service.factory";
 
 export class ProductControllerExpress implements IProductController {
 
