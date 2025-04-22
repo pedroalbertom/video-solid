@@ -29,7 +29,7 @@ export class ApiExpress implements Api {
 
     public async start(port: number): Promise<void> {
         this.app.listen(port, () => {
-            console.log(`Server running on ${port}`)
+            console.log(`🚀 Express server running on port ${port}`);
             this.printRoutes()
         })
     }

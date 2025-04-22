@@ -10,7 +10,7 @@ async function main() {
     await registerRoutesFastify(apiFastify)
 
     await apiExpress.start(8000)
-    await apiExpress.start(8001)
+    await apiFastify.start(8001)
 }
 
 main()

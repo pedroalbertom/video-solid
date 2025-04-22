@@ -5,18 +5,19 @@ import { ProductService } from "../../../services/product/implementation/product
 
 export class ProductControllerFastify {
 
-    private constructor(private service: ProductService) { }
+    private constructor() { }
 
     public static build() {
-        const aRepository = ProductRepositoryPrisma.build(prisma);
-        const aService = ProductService.build(aRepository);
-        return new ProductControllerFastify(aService);
+        return new ProductControllerFastify();
     }
 
     public async create(req: FastifyRequest, reply: FastifyReply) {
+        const aRepository = ProductRepositoryPrisma.build(prisma);
+        const aService = ProductService.build(aRepository);
+
         const { name, price } = req.body as { name: string; price: number };
 
-        const output = await this.service.create(name, price);
+        const output = await aService.create(name, price);
 
         const data = {
             id: output.id,
@@ -29,7 +30,10 @@ export class ProductControllerFastify {
     }
 
     public async list(req: FastifyRequest, reply: FastifyReply) {
-        const output = await this.service.list();
+        const aRepository = ProductRepositoryPrisma.build(prisma);
+        const aService = ProductService.build(aRepository);
+
+        const output = await aService.list();
 
         const data = {
             products: output.products,
@@ -39,10 +43,13 @@ export class ProductControllerFastify {
     }
 
     public async buy(req: FastifyRequest, reply: FastifyReply) {
+        const aRepository = ProductRepositoryPrisma.build(prisma);
+        const aService = ProductService.build(aRepository);
+
         const { id } = req.params as { id: string };
         const { amount } = req.body as { amount: number };
 
-        const output = await this.service.buy(id, amount);
+        const output = await aService.buy(id, amount);
 
         const data = {
             id: output.id,
@@ -53,10 +60,13 @@ export class ProductControllerFastify {
     }
 
     public async sell(req: FastifyRequest, reply: FastifyReply) {
+        const aRepository = ProductRepositoryPrisma.build(prisma);
+        const aService = ProductService.build(aRepository);
+
         const { id } = req.params as { id: string };
         const { amount } = req.body as { amount: number };
 
-        const output = await this.service.sell(id, amount);
+        const output = await aService.sell(id, amount);
 
         const data = {
             id: output.id,

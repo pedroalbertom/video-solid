@@ -5,18 +5,19 @@ import { prisma } from "../../../util/prisma.util";
 
 export class UserControllerExpress {
 
-    private constructor(private service: UserService) { }
+    private constructor() { }
 
     public static build() {
-        const aRepository = UserRepositoryPrisma.build(prisma);
-        const aService = UserService.build(aRepository);
-        return new UserControllerExpress(aService);
+        return new UserControllerExpress();
     }
 
     public async create(req: Request, res: Response) {
+        const aRepository = UserRepositoryPrisma.build(prisma);
+        const aService = UserService.build(aRepository);
+
         const { firstName, lastName, email, password } = req.body;
 
-        const output = await this.service.create(firstName, lastName, email, password);
+        const output = await aService.create(firstName, lastName, email, password);
 
         const data = {
             id: output.id,
@@ -30,7 +31,10 @@ export class UserControllerExpress {
     }
 
     public async list(req: Request, res: Response) {
-        const output = await this.service.list();
+        const aRepository = UserRepositoryPrisma.build(prisma);
+        const aService = UserService.build(aRepository);
+
+        const output = await aService.list();
 
         const data = {
             users: output.users
@@ -40,9 +44,12 @@ export class UserControllerExpress {
     }
 
     public async update(req: Request, res: Response) {
+        const aRepository = UserRepositoryPrisma.build(prisma);
+        const aService = UserService.build(aRepository);
+
         const id = req.params.id;
 
-        const output = await this.service.update(id, req.body);
+        const output = await aService.update(id, req.body);
 
         const data = {
             id: output.id,
@@ -56,9 +63,12 @@ export class UserControllerExpress {
     }
 
     public async delete(req: Request, res: Response) {
+        const aRepository = UserRepositoryPrisma.build(prisma);
+        const aService = UserService.build(aRepository);
+
         const id = req.params.id;
 
-        await this.service.delete(id);
+        await aService.delete(id);
 
         res.status(200).json({ msg: "Usuário deletado com sucesso!" });
     }
