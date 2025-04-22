@@ -1,4 +1,4 @@
-import { BuyOutputDto, CreateOutputDto, ListOutputDto, SellOutputDto } from "../../dto/product.dto"
+import { BuyOutputDto, CreateOutputDto, ListOutputDto, SellOutputDto } from "../../dtos/product.dto"
 
 export interface IProductService {
     create(name: string, price: number): Promise<CreateOutputDto>

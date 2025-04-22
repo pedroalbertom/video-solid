@@ -1,4 +1,4 @@
-import { UserDto, ListUserDto } from "../../dto/users.dto"
+import { UserDto, ListUserDto } from "../../dtos/users.dto"
 
 export interface IUserService {
     create(firstName: string, lastName: string, email: string, password: string,): Promise<UserDto>

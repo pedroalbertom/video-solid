@@ -1,4 +1,4 @@
-import { UserDto, ListUserDto } from "../../dto/users.dto";
+import { UserDto, ListUserDto } from "../../dtos/users.dto";
 import { User } from "../../entities/user";
 import { IUserRepository } from "../../repositories/user/user.repository";
 import { IUserService } from "./user.service";
