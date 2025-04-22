@@ -1,4 +1,4 @@
-import { UserProps } from "../types/user.types"
+import { UserProps } from "../../types/users/user.types"
 
 export class User {
     private constructor(readonly props: UserProps) { }

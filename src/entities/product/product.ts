@@ -1,4 +1,4 @@
-import { ProductProps } from "../types/product.types"
+import { ProductProps } from "../../types/product/product.types"
 
 export class Product {
     private constructor(readonly props: ProductProps) { }

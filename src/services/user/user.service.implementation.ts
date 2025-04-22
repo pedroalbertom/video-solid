@@ -1,5 +1,5 @@
-import { UserDto, ListUserDto } from "../../dtos/users.dto";
-import { User } from "../../entities/user";
+import { UserDto, ListUserDto } from "../../dtos/users/users.dto";
+import { User } from "../../entities/users/user";
 import { IUserRepository } from "../../repositories/user/user.repository";
 import { IUserService } from "./user.service";
 

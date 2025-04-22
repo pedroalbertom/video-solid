@@ -1,4 +1,4 @@
-import { User } from "../../entities/user";
+import { User } from "../../entities/users/user";
 import { PrismaClient } from "../../../generated/prisma";
 import { IUserRepository } from "./user.repository";
 

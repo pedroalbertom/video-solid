@@ -1,7 +1,7 @@
-import { ApiExpress } from "../api/api.express";
-import { ApiFastify } from "../api/api.fastify";
-import { registerProductRoutesExpress, registerProductRoutesFastify } from "./product.routes";
-import { registerUserRoutesExpress, registerUserRoutesFastify } from "./user.routes";
+import { ApiExpress } from "../api/express/api.express";
+import { ApiFastify } from "../api/fastify/api.fastify";
+import { registerProductRoutesExpress, registerProductRoutesFastify } from "./product/product.routes";
+import { registerUserRoutesExpress, registerUserRoutesFastify } from "./users/user.routes";
 
 export async function registerRoutesExpress(api: ApiExpress) {
     await registerProductRoutesExpress(api);

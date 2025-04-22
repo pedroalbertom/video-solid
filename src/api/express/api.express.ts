@@ -1,4 +1,4 @@
-import { Api } from "./api";
+import { Api } from "../api";
 import express, { Express, Request, Response } from 'express'
 
 export class ApiExpress implements Api {

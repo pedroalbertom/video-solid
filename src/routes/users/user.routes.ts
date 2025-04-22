@@ -1,7 +1,7 @@
-import { ApiExpress } from "../api/api.express";
-import { ApiFastify } from "../api/api.fastify";
-import { UserControllerExpress } from "../controllers/users/user.controller.express";
-import { UserControllerFastify } from "../controllers/users/user.controller.fastify";
+import { ApiExpress } from "../../api/express/api.express";
+import { ApiFastify } from "../../api/fastify/api.fastify";
+import { UserControllerExpress } from "../../controllers/users/user.controller.express";
+import { UserControllerFastify } from "../../controllers/users/user.controller.fastify";
 
 export async function registerUserRoutesExpress(api: ApiExpress) {
     const controller = UserControllerExpress.build();
