@@ -6,17 +6,17 @@ import { UserControllerFastify } from "../controllers/users/user.controller.fast
 export async function registerUserRoutesExpress(api: ApiExpress) {
     const controller = UserControllerExpress.build();
 
-    await api.addPostRoute("/users", controller.create);
-    await api.addGetRoute("/users", controller.list);
-    await api.addPutRoute("/users/:id", controller.update);
-    await api.addDeleteRoute("/users/:id", controller.delete);
+    await api.addPostRoute("/users", controller.create.bind(controller));
+    await api.addGetRoute("/users", controller.list.bind(controller));
+    await api.addPutRoute("/users/:id", controller.update.bind(controller));
+    await api.addDeleteRoute("/users/:id", controller.delete.bind(controller));
 }
 
 export async function registerUserRoutesFastify(api: ApiFastify) {
     const controller = UserControllerFastify.build();
 
-    await api.addPostRoute("/users", controller.create);
-    await api.addGetRoute("/users", controller.list);
-    await api.addPutRoute("/users/:id", controller.update);
-    await api.addDeleteRoute("/users/:id", controller.delete);
+    await api.addPostRoute("/users", controller.create.bind(controller));
+    await api.addGetRoute("/users", controller.list.bind(controller));
+    await api.addPutRoute("/users/:id", controller.update.bind(controller));
+    await api.addDeleteRoute("/users/:id", controller.delete.bind(controller));
 }

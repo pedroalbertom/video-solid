@@ -1,20 +1,17 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { prisma } from "../../util/prisma.util";
-import { UserRepositoryPrisma } from "../../repositories/user/user.repository.prisma";
-import { UserService } from "../../services/user/user.service.implementation";
 import { IUserController } from "./user.controller";
+import { IUserService } from "../../services/user/user.service";
+import { userService } from "../../util/repository.util";
 
 export class UserControllerFastify implements IUserController {
 
-    private constructor() { }
+    private constructor(readonly service: IUserService) { }
 
     public static build() {
-        return new UserControllerFastify();
+        return new UserControllerFastify(userService);
     }
 
     public async create(req: FastifyRequest, reply: FastifyReply) {
-        const aRepository = UserRepositoryPrisma.build(prisma);
-        const aService = UserService.build(aRepository);
 
         const { firstName, lastName, email, password } = req.body as {
             firstName: string;
@@ -23,7 +20,7 @@ export class UserControllerFastify implements IUserController {
             password: string;
         };
 
-        const output = await aService.create(firstName, lastName, email, password);
+        const output = await this.service.create(firstName, lastName, email, password);
 
         const data = {
             id: output.id,
@@ -37,10 +34,8 @@ export class UserControllerFastify implements IUserController {
     }
 
     public async list(req: FastifyRequest, reply: FastifyReply) {
-        const aRepository = UserRepositoryPrisma.build(prisma);
-        const aService = UserService.build(aRepository);
 
-        const output = await aService.list();
+        const output = await this.service.list();
 
         const data = {
             users: output.users
@@ -50,8 +45,6 @@ export class UserControllerFastify implements IUserController {
     }
 
     public async update(req: FastifyRequest, reply: FastifyReply) {
-        const aRepository = UserRepositoryPrisma.build(prisma);
-        const aService = UserService.build(aRepository);
 
         const { id } = req.params as { id: string };
         const body = req.body as {
@@ -61,7 +54,7 @@ export class UserControllerFastify implements IUserController {
             password?: string;
         };
 
-        const output = await aService.update(id, body);
+        const output = await this.service.update(id, body);
 
         const data = {
             id: output.id,
@@ -75,12 +68,10 @@ export class UserControllerFastify implements IUserController {
     }
 
     public async delete(req: FastifyRequest, reply: FastifyReply) {
-        const aRepository = UserRepositoryPrisma.build(prisma);
-        const aService = UserService.build(aRepository);
 
         const { id } = req.params as { id: string };
 
-        await aService.delete(id);
+        await this.service.delete(id);
 
         reply.code(200).send({ msg: "Usuário deletado com sucesso!" });
     }

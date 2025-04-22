@@ -7,3 +7,4 @@ export interface IUserController {
     update(req: FastifyRequest | Request, reply: FastifyReply | Response): Promise<void>;
     delete(req: FastifyRequest | Request, reply: FastifyReply | Response): Promise<void>;
 }
+ 

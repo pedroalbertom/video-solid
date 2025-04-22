@@ -6,17 +6,17 @@ import { ProductControllerFastify } from "../controllers/product/product.control
 export async function registerProductRoutesExpress(api: ApiExpress) {
     const controller = ProductControllerExpress.build();
 
-    await api.addPostRoute("/products", controller.create);
-    await api.addPostRoute("/products/:id/buy", controller.buy);
-    await api.addPostRoute("/products/:id/sell", controller.sell);
-    await api.addGetRoute("/products", controller.list);
+    await api.addPostRoute("/products", controller.create.bind(controller));
+    await api.addPostRoute("/products/:id/buy", controller.buy.bind(controller));
+    await api.addPostRoute("/products/:id/sell", controller.sell.bind(controller));
+    await api.addGetRoute("/products", controller.list.bind(controller));
 }
 
 export async function registerProductRoutesFastify(api: ApiFastify) {
     const controller = ProductControllerFastify.build();
 
-    await api.addPostRoute("/products", controller.create);
-    await api.addPostRoute("/products/:id/buy", controller.buy);
-    await api.addPostRoute("/products/:id/sell", controller.sell);
-    await api.addGetRoute("/products", controller.list);
+    await api.addPostRoute("/products", controller.create.bind(controller));
+    await api.addPostRoute("/products/:id/buy", controller.buy.bind(controller));
+    await api.addPostRoute("/products/:id/sell", controller.sell.bind(controller));
+    await api.addGetRoute("/products", controller.list.bind(controller));
 }
