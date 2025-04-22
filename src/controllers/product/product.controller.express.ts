@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { ProductRepositoryPrisma } from "../../repositories/product/prisma/product.repository.prisma";
-import { ProductService } from "../../services/product/implementation/product.service.implementation";
+import { ProductRepositoryPrisma } from "../../repositories/product/product.repository.prisma";
 import { prisma } from "../../util/prisma.util";
+import { ProductService } from "../../services/product/product.service.implementation";
 
 export class ProductControllerExpress {
 

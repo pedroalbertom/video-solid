@@ -1,6 +1,6 @@
-import { Product } from "../../../entities/product";
-import { IProductRepository } from "../../../repositories/product/product.repository";
-import { BuyOutputDto, CreateOutputDto, IProductService, ListOutputDto, SellOutputDto } from "../product.service";
+import { Product } from "../../entities/product";
+import { IProductRepository } from "../../repositories/product/product.repository";
+import { BuyOutputDto, CreateOutputDto, IProductService, ListOutputDto, SellOutputDto } from "./product.service";
 
 export class ProductService implements IProductService {
 

@@ -1,6 +1,6 @@
-import { User } from "../../../entities/user";
-import { IUserRepository } from "../../../repositories/user/user.repository";
-import { IUserService, ListUserDto, UserDto } from "../user.service";
+import { User } from "../../entities/user";
+import { IUserRepository } from "../../repositories/user/user.repository";
+import { IUserService, ListUserDto, UserDto } from "./user.service";
 
 export class UserService implements IUserService {
 
