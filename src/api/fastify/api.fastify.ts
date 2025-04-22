@@ -29,7 +29,7 @@ export class ApiFastify implements Api {
         try {
             await this.app.listen({ port });
             console.log(`🚀 Fastify server running on port ${port}`);
-            this.printRoutes();
+            // this.printRoutes();
         } catch (err) {
             console.error("Erro ao iniciar o Fastify:", err);
             process.exit(1);
