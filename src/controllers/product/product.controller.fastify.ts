@@ -1,9 +1,10 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { ProductRepositoryPrisma } from "../../repositories/product/product.repository.prisma";
 import { prisma } from "../../util/prisma.util";
+import { ProductRepositoryPrisma } from "../../repositories/product/product.repository.prisma";
 import { ProductService } from "../../services/product/product.service.implementation";
+import { IProductController } from "./product.controller";
 
-export class ProductControllerFastify {
+export class ProductControllerFastify implements IProductController {
 
     private constructor() { }
 

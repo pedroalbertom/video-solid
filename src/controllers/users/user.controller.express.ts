@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
+import { prisma } from "../../util/prisma.util";
 import { UserRepositoryPrisma } from "../../repositories/user/user.repository.prisma";
 import { UserService } from "../../services/user/user.service.implementation";
-import { prisma } from "../../util/prisma.util";
+import { IUserController } from "./user.controller";
 
-export class UserControllerExpress {
+export class UserControllerExpress implements IUserController {
 
     private constructor() { }
 
