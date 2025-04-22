@@ -28,10 +28,14 @@ export class ApiExpress implements Api {
     }
 
     public async start(port: number): Promise<void> {
-        this.app.listen(port, () => {
+        try {
+            this.app.listen({ port });
             console.log(`🚀 Express server running on port ${port}`);
-            this.printRoutes()
-        })
+            this.printRoutes();
+        } catch (err) {
+            console.error("Erro ao iniciar o Express:", err);
+            process.exit(1);
+        }
     }
 
     private printRoutes() {

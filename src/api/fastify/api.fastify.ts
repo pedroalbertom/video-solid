@@ -37,7 +37,7 @@ export class ApiFastify implements Api {
     }
 
     private printRoutes() {
-        console.log("📡 Rotas registradas:");
-        this.app.printRoutes();
+        console.log("Rotas registradas:");
+        console.log(this.app.printRoutes());
     }
 }
