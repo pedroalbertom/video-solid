@@ -2,14 +2,14 @@ import { Request, Response } from "express";
 import { FastifyRequest, FastifyReply } from "fastify";
 import { IUserController } from "./user.controller";
 import { IUserService } from "../../services/user/user.service";
-import { userService } from "../../util/service.factory";
+import { userServicePrisma, userServiceSequelize } from "../../util/service.factory";
 import { getBody, sendResponse, getParams } from "../../util/http.functions";
 
 export class UserController implements IUserController {
     private constructor(readonly service: IUserService) { }
 
     public static build() {
-        return new UserController(userService);
+        return new UserController(userServiceSequelize);
     }
 
     public async create(request: FastifyRequest | Request, response: FastifyReply | Response) {

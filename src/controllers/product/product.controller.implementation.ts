@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { FastifyRequest, FastifyReply } from "fastify";
 import { IProductController } from "./product.controller";
 import { IProductService } from "../../services/product/product.service";
-import { productService } from "../../util/service.factory";
+import { productServicePrisma, productServiceSequelize } from "../../util/service.factory";
 import { getBody, sendResponse, getParams } from "../../util/http.functions";
 
 export class ProductController implements IProductController {
@@ -10,7 +10,7 @@ export class ProductController implements IProductController {
     private constructor(readonly service: IProductService) { }
 
     public static build() {
-        return new ProductController(productService);
+        return new ProductController(productServiceSequelize);
     }
 
     public async create(request: FastifyRequest | Request, response: FastifyReply | Response) {
