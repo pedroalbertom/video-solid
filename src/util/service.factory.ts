@@ -5,6 +5,7 @@ import { UserRepositorySequelize } from "../repositories/user/user.repository.se
 import { ProductService } from "../services/product/product.service.implementation";
 import { UserService } from "../services/user/user.service.implementation";
 import { prisma } from "./prisma.factory";
+import "./sequelize.factory";
 
 const userRepositoryPrisma = UserRepositoryPrisma.build(prisma);
 export const userServicePrisma = UserService.build(userRepositoryPrisma)
