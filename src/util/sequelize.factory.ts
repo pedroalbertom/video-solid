@@ -11,7 +11,13 @@ export const sequelize = new Sequelize({
     logging: false
 });
 
-initProductModel(sequelize);
-initUserModel(sequelize);
+async function initSequelize() {
+    initProductModel(sequelize);
+    initUserModel(sequelize);
 
-sequelize.authenticate();
+    await sequelize.sync();
+    await sequelize.authenticate();
+}
+
+initSequelize();
+
