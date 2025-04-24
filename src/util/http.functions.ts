@@ -1,17 +1,17 @@
-export function getBody(req: any): any {
-    return req.body;
+export function getBody(request: any): any {
+    return request.body;
 }
 
-export function getParams(req: any): any {
-    return req.params;
+export function getParams(request: any): any {
+    return request.params;
 }
 
-export function sendResponse(reply: any, statusCode: number, data: any): void {
-    if (typeof reply.code === "function" && typeof reply.send === "function") {
-        reply.code(statusCode).send(data); // Fastify
-    } else if (typeof reply.status === "function" && typeof reply.json === "function") {
-        reply.status(statusCode).json(data); // Express
+export function sendResponse(response: any, statusCode: number, data: any): void {
+    if (typeof response.code === "function" && typeof response.send === "function") {
+        response.code(statusCode).send(data); // Fastify
+    } else if (typeof response.status === "function" && typeof response.json === "function") {
+        response.status(statusCode).json(data); // Express
     } else {
-        throw new Error("Unknown reply object");
+        throw new Error("Unknown response object");
     }
 }

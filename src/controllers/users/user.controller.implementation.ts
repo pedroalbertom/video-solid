@@ -12,8 +12,8 @@ export class UserController implements IUserController {
         return new UserController(userService);
     }
 
-    public async create(req: FastifyRequest | Request, reply: FastifyReply | Response) {
-        const body = getBody(req);
+    public async create(request: FastifyRequest | Request, response: FastifyReply | Response) {
+        const body = getBody(request);
 
         const { firstName, lastName, email, password } = body;
 
@@ -27,22 +27,22 @@ export class UserController implements IUserController {
             password,
         };
 
-        sendResponse(reply, 201, data);
+        sendResponse(response, 201, data);
     }
 
-    public async list(req: FastifyRequest | Request, reply: FastifyReply | Response) {
+    public async list(request: FastifyRequest | Request, response: FastifyReply | Response) {
         const output = await this.service.list();
 
         const data = {
             users: output.users,
         };
 
-        sendResponse(reply, 200, data);
+        sendResponse(response, 200, data);
     }
 
-    public async update(req: FastifyRequest | Request, reply: FastifyReply | Response) {
-        const params = getParams(req);
-        const body = getBody(req);
+    public async update(request: FastifyRequest | Request, response: FastifyReply | Response) {
+        const params = getParams(request);
+        const body = getBody(request);
 
         const output = await this.service.update(params.id, body);
 
@@ -54,14 +54,14 @@ export class UserController implements IUserController {
             password: output.password,
         };
 
-        sendResponse(reply, 200, data);
+        sendResponse(response, 200, data);
     }
 
-    public async delete(req: FastifyRequest | Request, reply: FastifyReply | Response) {
-        const params = getParams(req);
+    public async delete(request: FastifyRequest | Request, response: FastifyReply | Response) {
+        const params = getParams(request);
 
         await this.service.delete(params.id);
 
-        sendResponse(reply, 200, { msg: "Usuário deletado com sucesso!" });
+        sendResponse(response, 200, { msg: "Usuário deletado com sucesso!" });
     }
 }

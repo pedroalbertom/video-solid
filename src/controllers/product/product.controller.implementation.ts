@@ -13,8 +13,8 @@ export class ProductController implements IProductController {
         return new ProductController(productService);
     }
 
-    public async create(req: FastifyRequest | Request, reply: FastifyReply | Response) {
-        const body = getBody(req);
+    public async create(request: FastifyRequest | Request, response: FastifyReply | Response) {
+        const body = getBody(request);
         const { name, price } = body;
 
         const output = await this.service.create(name, price);
@@ -26,22 +26,22 @@ export class ProductController implements IProductController {
             balance: output.balance,
         };
 
-        sendResponse(reply, 201, data);
+        sendResponse(response, 201, data);
     }
 
-    public async list(req: FastifyRequest | Request, reply: FastifyReply | Response) {
+    public async list(request: FastifyRequest | Request, response: FastifyReply | Response) {
         const output = await this.service.list();
 
         const data = {
             products: output.products,
         };
 
-        sendResponse(reply, 200, data);
+        sendResponse(response, 200, data);
     }
 
-    public async buy(req: FastifyRequest | Request, reply: FastifyReply | Response) {
-        const params = getParams(req);
-        const body = getBody(req);
+    public async buy(request: FastifyRequest | Request, response: FastifyReply | Response) {
+        const params = getParams(request);
+        const body = getBody(request);
         const { amount } = body;
 
         const output = await this.service.buy(params.id, amount);
@@ -51,12 +51,12 @@ export class ProductController implements IProductController {
             balance: output.balance,
         };
 
-        sendResponse(reply, 200, data);
+        sendResponse(response, 200, data);
     }
 
-    public async sell(req: FastifyRequest | Request, reply: FastifyReply | Response) {
-        const params = getParams(req);
-        const body = getBody(req);
+    public async sell(request: FastifyRequest | Request, response: FastifyReply | Response) {
+        const params = getParams(request);
+        const body = getBody(request);
         const { amount } = body;
 
         const output = await this.service.sell(params.id, amount);
@@ -66,6 +66,6 @@ export class ProductController implements IProductController {
             balance: output.balance,
         };
 
-        sendResponse(reply, 200, data);
+        sendResponse(response, 200, data);
     }
 }
