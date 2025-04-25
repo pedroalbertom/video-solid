@@ -24,7 +24,6 @@ export class UserController implements IUserController {
             firstName,
             lastName,
             email,
-            password,
         };
 
         sendResponse(response, 201, data);

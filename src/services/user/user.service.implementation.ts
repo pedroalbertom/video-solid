@@ -16,7 +16,10 @@ export class UserService implements IUserService {
         const existingUser = await this.userRepository.findByEmail(email)
         if (existingUser) throw new Error("Email já está em uso.")
 
+        if (!firstName || !lastName || !email || !password) throw new Error("Campo faltando")
+
         const hashedPassword = await hashPassword(password);
+
         const user = User.create(firstName, lastName, email, hashedPassword)
 
         await this.userRepository.save(user)

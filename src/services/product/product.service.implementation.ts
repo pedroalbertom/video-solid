@@ -12,6 +12,9 @@ export class ProductService implements IProductService {
     }
 
     public async create(name: string, price: number): Promise<CreateOutputDto> {
+
+        if (!name || !price) throw new Error("Campo faltando")
+
         const aProduct = Product.create(name, price)
 
         await this.repository.save(aProduct)
