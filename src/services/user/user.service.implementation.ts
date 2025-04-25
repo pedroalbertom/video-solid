@@ -1,4 +1,4 @@
-import { UserDto, ListUserDto } from "../../dtos/users/users.dto";
+import { ListUserDto, UserInputDto, UserOutputDto } from "../../dtos/users/users.dto";
 import { User } from "../../entities/users/user";
 import { IUserRepository } from "../../repositories/user/user.repository";
 import { hashPassword } from "../../util/password.hash";
@@ -12,18 +12,20 @@ export class UserService implements IUserService {
         return new UserService(userRepository)
     }
 
-    public async create(firstName: string, lastName: string, email: string, password: string): Promise<UserDto> {
+    public async create(firstName: string, lastName: string, email: string, password: string): Promise<UserOutputDto> {
+        const existingUser = await this.userRepository.findByEmail(email)
+        if (existingUser) throw new Error("Email já está em uso.")
+
         const hashedPassword = await hashPassword(password);
-        const aUser = User.create(firstName, lastName, email, hashedPassword)
+        const user = User.create(firstName, lastName, email, hashedPassword)
 
-        await this.userRepository.save(aUser)
+        await this.userRepository.save(user)
 
-        const output: UserDto = {
-            id: aUser.id,
-            firstName: aUser.firstName,
-            lastName: aUser.lastName,
-            email: aUser.email,
-            password: aUser.password
+        const output: UserOutputDto = {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
         }
 
         return output
@@ -49,7 +51,7 @@ export class UserService implements IUserService {
         return output
     }
 
-    public async update(id: string, data: Partial<UserDto>): Promise<UserDto> {
+    public async update(id: string, data: Partial<UserInputDto>): Promise<UserOutputDto> {
         const user = await this.userRepository.findById(id)
         if (!user) throw new Error("Usuário não encontrado.")
 
@@ -57,8 +59,8 @@ export class UserService implements IUserService {
         if (data.firstName) user.firstName = data.firstName
         if (data.lastName) user.lastName = data.lastName
         if (data.email) {
-            const existingEmail = await this.userRepository.findById(id)
-            if (existingEmail) throw new Error("Email já está em uso.")
+            const existingUser = await this.userRepository.findByEmail(data.email)
+            if (existingUser) throw new Error("Email já está em uso.")
             user.email = data.email
         }
         if (data.password) {
@@ -73,7 +75,6 @@ export class UserService implements IUserService {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
-            password: user.password
         }
     }
 
