@@ -51,7 +51,6 @@ export class UserController implements IUserController {
             firstName: output.firstName,
             lastName: output.lastName,
             email: output.email,
-            password: output.password,
         };
 
         sendResponse(response, 200, data);
