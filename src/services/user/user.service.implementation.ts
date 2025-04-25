@@ -1,6 +1,7 @@
 import { UserDto, ListUserDto } from "../../dtos/users/users.dto";
 import { User } from "../../entities/users/user";
 import { IUserRepository } from "../../repositories/user/user.repository";
+import { hashPassword } from "../../util/password.hash";
 import { IUserService } from "./user.service";
 
 export class UserService implements IUserService {
@@ -12,7 +13,8 @@ export class UserService implements IUserService {
     }
 
     public async create(firstName: string, lastName: string, email: string, password: string): Promise<UserDto> {
-        const aUser = User.create(firstName, lastName, email, password)
+        const hashedPassword = await hashPassword(password);
+        const aUser = User.create(firstName, lastName, email, hashedPassword)
 
         await this.userRepository.save(aUser)
 
@@ -55,8 +57,10 @@ export class UserService implements IUserService {
         if (data.firstName) user.firstName = data.firstName
         if (data.lastName) user.lastName = data.lastName
         if (data.email) user.email = data.email
-        if (data.password) user.password = data.password
-
+        if (data.password) {
+            const hashedPassword = await hashPassword(data.password);
+            user.password = hashedPassword
+        }
 
         await this.userRepository.update(user)
 
