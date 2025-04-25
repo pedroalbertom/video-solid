@@ -50,13 +50,17 @@ export class UserService implements IUserService {
     }
 
     public async update(id: string, data: Partial<UserDto>): Promise<UserDto> {
-        const user = await this.userRepository.find(id)
-        if (!user) throw new Error("Usuário não encontrado")
+        const user = await this.userRepository.findById(id)
+        if (!user) throw new Error("Usuário não encontrado.")
 
 
         if (data.firstName) user.firstName = data.firstName
         if (data.lastName) user.lastName = data.lastName
-        if (data.email) user.email = data.email
+        if (data.email) {
+            const existingEmail = await this.userRepository.findById(id)
+            if (existingEmail) throw new Error("Email já está em uso.")
+            user.email = data.email
+        }
         if (data.password) {
             const hashedPassword = await hashPassword(data.password);
             user.password = hashedPassword

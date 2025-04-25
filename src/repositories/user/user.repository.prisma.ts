@@ -23,14 +23,14 @@ export class UserRepositoryPrisma implements IUserRepository {
     }
 
     public async list(): Promise<User[]> {
-        const aUser = await this.prisma.user.findMany()
+        const users = await this.prisma.user.findMany()
 
-        const users: User[] = aUser.map(p => {
+        const userList: User[] = users.map(p => {
             const { id, firstName, lastName, email, password } = p
             return User.with(id, firstName, lastName, email, password)
         })
 
-        return users
+        return userList
     }
 
     public async update(user: User): Promise<void> {
@@ -50,16 +50,21 @@ export class UserRepositoryPrisma implements IUserRepository {
         })
     }
 
-    public async find(id: string): Promise<User | null> {
-        const aUser = await this.prisma.user.findUnique({ where: { id } })
+    public async findById(id: string): Promise<User | null> {
+        const user = await this.prisma.user.findUnique({ where: { id } })
 
-        if (!aUser) return null
+        if (!user) return null
 
-        const { firstName, lastName, email, password } = aUser
 
-        const user = User.with(id, firstName, lastName, email, password)
+        return User.with(user.id, user.firstName, user.lastName, user.email, user.password)
+    }
 
-        return user
+    public async findByEmail(email: string): Promise<User | null> {
+        const user = await this.prisma.user.findFirst({ where: { email } })
+
+        if (!user) return null
+
+        return User.with(user.id, user.firstName, user.lastName, email, user.password)
     }
 
     public async delete(id: string): Promise<void> {

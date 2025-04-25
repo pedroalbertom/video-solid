@@ -20,9 +20,9 @@ export class UserRepositorySequelize implements IUserRepository {
     }
 
     public async list(): Promise<User[]> {
-        const models = await UserModel.findAll();
+        const users = await UserModel.findAll();
 
-        return models.map(p => User.with(p.id, p.firstName, p.lastName, p.email, p.password));
+        return users.map(p => User.with(p.id, p.firstName, p.lastName, p.email, p.password));
     }
 
     public async update(user: User): Promise<void> {
@@ -36,12 +36,20 @@ export class UserRepositorySequelize implements IUserRepository {
         });
     }
 
-    public async find(id: string): Promise<User | null> {
-        const model = await UserModel.findByPk(id);
+    public async findById(id: string): Promise<User | null> {
+        const user = await UserModel.findByPk(id);
 
-        if (!model) return null;
+        if (!user) return null;
 
-        return User.with(model.id, model.firstName, model.lastName, model.email, model.password);
+        return User.with(user.id, user.firstName, user.lastName, user.email, user.password);
+    }
+
+    public async findByEmail(email: string): Promise<User | null> {
+        const user = await UserModel.findOne({ where: { email } });
+
+        if (!user) return null;
+
+        return User.with(user.id, user.firstName, user.lastName, user.email, user.password);
     }
 
     public async delete(id: string): Promise<void | null> {
