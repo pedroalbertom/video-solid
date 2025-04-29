@@ -1,4 +1,4 @@
-import { LoginInputDto, LoginOutputDto } from "../../dtos/auth/auth.dto";
+import { LoginInputDto, LoginOutputDto } from "../../dtos/auth/auth.dto"
 
 export interface IAuthService {
     login(data: LoginInputDto): Promise<LoginOutputDto>

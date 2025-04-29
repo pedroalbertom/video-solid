@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
-import { LoginInputDto, LoginOutputDto } from "../../dtos/auth/auth.dto";
-import { IUserRepository } from "../../repositories/user/user.repository";
-import { IAuthService } from "./auth.service";
+import { LoginInputDto, LoginOutputDto } from "../../dtos/auth/auth.dto"
+import { IUserRepository } from "../../repositories/user/user.repository"
+import { IAuthService } from "./auth.service"
 
 export class AuthService implements IAuthService {
 
@@ -42,7 +42,7 @@ export class AuthService implements IAuthService {
         }
     }
     public async logout(token: string): Promise<void> {
-        throw new Error("Method not implemented.");
+        throw new Error("Method not implemented.")
     }
 
 }

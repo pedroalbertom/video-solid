@@ -1,6 +1,6 @@
-import { ApiExpress } from "./api/express/api.express";
-import { ApiFastify } from "./api/fastify/api.fastify";
-import { registerRoutesExpress, registerRoutesFastify } from "./routes/routes";
+import { ApiExpress } from "./api/express/api.express"
+import { ApiFastify } from "./api/fastify/api.fastify"
+import { registerRoutesExpress, registerRoutesFastify } from "./routes/routes"
 
 async function main() {
     const apiExpress = ApiExpress.build()

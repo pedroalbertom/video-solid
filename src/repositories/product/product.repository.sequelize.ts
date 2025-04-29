@@ -1,12 +1,12 @@
-import { Product } from "../../entities/product/product";
-import { IProductRepository } from "./product.repository";
-import { ProductModel } from "../../models/product.model";
+import { Product } from "../../entities/product/product"
+import { IProductRepository } from "./product.repository"
+import { ProductModel } from "../../models/product.model"
 
 export class ProductRepositorySequelize implements IProductRepository {
     private constructor() { }
 
     public static build() {
-        return new ProductRepositorySequelize();
+        return new ProductRepositorySequelize()
     }
 
     public async save(product: Product): Promise<void> {
@@ -15,13 +15,13 @@ export class ProductRepositorySequelize implements IProductRepository {
             name: product.name,
             price: product.price,
             quantity: product.quantity
-        });
+        })
     }
 
     public async list(): Promise<Product[]> {
-        const models = await ProductModel.findAll();
+        const models = await ProductModel.findAll()
 
-        return models.map(p => Product.with(p.id, p.name, p.price, p.quantity));
+        return models.map(p => Product.with(p.id, p.name, p.price, p.quantity))
     }
 
     public async update(product: Product): Promise<void> {
@@ -31,14 +31,14 @@ export class ProductRepositorySequelize implements IProductRepository {
             quantity: product.quantity
         }, {
             where: { id: product.id }
-        });
+        })
     }
 
     public async find(id: string): Promise<Product | null> {
-        const model = await ProductModel.findByPk(id);
+        const model = await ProductModel.findByPk(id)
 
-        if (!model) return null;
+        if (!model) return null
 
-        return Product.with(model.id, model.name, model.price, model.quantity);
+        return Product.with(model.id, model.name, model.price, model.quantity)
     }
 }

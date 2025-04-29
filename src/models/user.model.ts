@@ -1,11 +1,11 @@
-import { DataTypes, Model, Sequelize } from "sequelize";
+import { DataTypes, Model, Sequelize } from "sequelize"
 
 export class UserModel extends Model {
-    declare id: string;
-    declare firstName: string;
-    declare lastName: string;
-    declare email: string;
-    declare password: string;
+    declare id: string
+    declare firstName: string
+    declare lastName: string
+    declare email: string
+    declare password: string
 }
 
 export function initUserModel(sequelize: Sequelize) {
@@ -22,5 +22,5 @@ export function initUserModel(sequelize: Sequelize) {
         sequelize,
         tableName: "users",
         timestamps: false,
-    });
+    })
 }

@@ -1,12 +1,12 @@
-import { User } from "../../entities/users/user";
-import { UserModel } from "../../models/user.model";
-import { IUserRepository } from "./user.repository";
+import { User } from "../../entities/users/user"
+import { UserModel } from "../../models/user.model"
+import { IUserRepository } from "./user.repository"
 
 export class UserRepositorySequelize implements IUserRepository {
     private constructor() { }
 
     public static build() {
-        return new UserRepositorySequelize();
+        return new UserRepositorySequelize()
     }
 
     public async save(user: User): Promise<void> {
@@ -16,13 +16,13 @@ export class UserRepositorySequelize implements IUserRepository {
             lastName: user.lastName,
             email: user.email,
             password: user.password
-        });
+        })
     }
 
     public async list(): Promise<User[]> {
-        const users = await UserModel.findAll();
+        const users = await UserModel.findAll()
 
-        return users.map(p => User.with(p.id, p.firstName, p.lastName, p.email, p.password));
+        return users.map(p => User.with(p.id, p.firstName, p.lastName, p.email, p.password))
     }
 
     public async update(user: User): Promise<void> {
@@ -33,23 +33,23 @@ export class UserRepositorySequelize implements IUserRepository {
             password: user.password
         }, {
             where: { id: user.id }
-        });
+        })
     }
 
     public async findById(id: string): Promise<User | null> {
-        const user = await UserModel.findByPk(id);
+        const user = await UserModel.findByPk(id)
 
-        if (!user) return null;
+        if (!user) return null
 
-        return User.with(user.id, user.firstName, user.lastName, user.email, user.password);
+        return User.with(user.id, user.firstName, user.lastName, user.email, user.password)
     }
 
     public async findByEmail(email: string): Promise<User | null> {
-        const user = await UserModel.findOne({ where: { email } });
+        const user = await UserModel.findOne({ where: { email } })
 
-        if (!user) return null;
+        if (!user) return null
 
-        return User.with(user.id, user.firstName, user.lastName, user.email, user.password);
+        return User.with(user.id, user.firstName, user.lastName, user.email, user.password)
     }
 
     public async delete(id: string): Promise<void | null> {

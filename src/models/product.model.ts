@@ -1,10 +1,10 @@
-import { Model, Sequelize, DataTypes } from "sequelize";
+import { Model, Sequelize, DataTypes } from "sequelize"
 
 export class ProductModel extends Model {
-    declare id: string;
-    declare name: string;
-    declare price: number;
-    declare quantity: number;
+    declare id: string
+    declare name: string
+    declare price: number
+    declare quantity: number
 }
 
 export function initProductModel(sequelize: Sequelize) {
@@ -20,5 +20,5 @@ export function initProductModel(sequelize: Sequelize) {
         sequelize,
         tableName: "products",
         timestamps: false,
-    });
+    })
 }

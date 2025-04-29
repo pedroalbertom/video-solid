@@ -1,4 +1,4 @@
-import { Api } from "../api";
+import { Api } from "../api"
 import express, { Express, Request, Response } from 'express'
 
 export class ApiExpress implements Api {
@@ -29,12 +29,12 @@ export class ApiExpress implements Api {
 
     public async start(port: number): Promise<void> {
         try {
-            this.app.listen({ port });
-            console.log(`🚀 Express server running on port ${port}`);
-            // this.printRoutes();
+            this.app.listen({ port })
+            console.log(`🚀 Express server running on port ${port}`)
+            // this.printRoutes()
         } catch (err) {
-            console.error("Erro ao iniciar o Express:", err);
-            process.exit(1);
+            console.error("Erro ao iniciar o Express:", err)
+            process.exit(1)
         }
     }
 

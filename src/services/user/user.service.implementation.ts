@@ -1,8 +1,8 @@
-import { ListUserDto, UserInputDto, UserOutputDto } from "../../dtos/users/users.dto";
-import { User } from "../../entities/users/user";
-import { IUserRepository } from "../../repositories/user/user.repository";
-import { hashPassword } from "../../util/password.hash";
-import { IUserService } from "./user.service";
+import { ListUserDto, UserInputDto, UserOutputDto } from "../../dtos/users/users.dto"
+import { User } from "../../entities/users/user"
+import { IUserRepository } from "../../repositories/user/user.repository"
+import { hashPassword } from "../../util/password.hash"
+import { IUserService } from "./user.service"
 
 export class UserService implements IUserService {
 
@@ -18,7 +18,7 @@ export class UserService implements IUserService {
 
         if (!firstName || !lastName || !email || !password) throw new Error("Campo faltando")
 
-        const hashedPassword = await hashPassword(password);
+        const hashedPassword = await hashPassword(password)
 
         const user = User.create(firstName, lastName, email, hashedPassword)
 
@@ -67,7 +67,7 @@ export class UserService implements IUserService {
             user.email = data.email
         }
         if (data.password) {
-            const hashedPassword = await hashPassword(data.password);
+            const hashedPassword = await hashPassword(data.password)
             user.password = hashedPassword
         }
 
