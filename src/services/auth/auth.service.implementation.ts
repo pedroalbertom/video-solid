@@ -16,6 +16,7 @@ export class AuthService implements IAuthService {
     }
 
     public async login(data: LoginInputDto): Promise<LoginOutputDto> {
+        if (!data.email || !data.password) throw new Error("Credenciais ausentes, informe email e senha!")
         const user = await this.userRepository.findByEmail(data.email)
 
         if (!user) throw new Error("Usuário não encontrado!")

@@ -13,7 +13,7 @@ export class ProductService implements IProductService {
 
     public async create(name: string, price: number): Promise<CreateOutputDto> {
 
-        if (!name || !price) throw new Error("Campo faltando")
+        if (!name || !price) throw new Error("Campos faltando, informe o nome e o preço do produto")
 
         const aProduct = Product.create(name, price)
 
@@ -28,6 +28,8 @@ export class ProductService implements IProductService {
     }
 
     public async sell(id: string, amount: number): Promise<SellOutputDto> {
+        if (!id || !amount) throw new Error("Campos faltando, informe o id e a quantidade do produto")
+
         const aProduct = await this.repository.find(id)
 
         if (!aProduct) throw new Error(`O produto ${id} não foi encontrado`)
@@ -45,6 +47,8 @@ export class ProductService implements IProductService {
     }
 
     public async buy(id: string, amount: number): Promise<BuyOutputDto> {
+        if (!id || !amount) throw new Error("Campos faltando, informe o id e a quantidade do produto")
+
         const aProduct = await this.repository.find(id)
 
         if (!aProduct) throw new Error(`O produto ${id} não foi encontrado`)

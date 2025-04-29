@@ -13,10 +13,10 @@ export class UserService implements IUserService {
     }
 
     public async create(firstName: string, lastName: string, email: string, password: string): Promise<UserOutputDto> {
+        if (!firstName || !lastName || !email || !password) throw new Error("Campos faltando, informe nome, sobrenome, email e senha!")
+
         const existingUser = await this.userRepository.findByEmail(email)
         if (existingUser) throw new Error("Email já está em uso.")
-
-        if (!firstName || !lastName || !email || !password) throw new Error("Campo faltando")
 
         const hashedPassword = await hashPassword(password)
 
@@ -58,7 +58,6 @@ export class UserService implements IUserService {
         const user = await this.userRepository.findById(id)
         if (!user) throw new Error("Usuário não encontrado.")
 
-
         if (data.firstName) user.firstName = data.firstName
         if (data.lastName) user.lastName = data.lastName
         if (data.email) {
@@ -83,6 +82,7 @@ export class UserService implements IUserService {
 
 
     public async delete(id: string): Promise<void> {
+        if (!id) throw new Error("Campos faltando, informe o id!")
         await this.userRepository.delete(id)
     }
 

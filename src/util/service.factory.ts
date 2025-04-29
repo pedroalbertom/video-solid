@@ -8,16 +8,16 @@ import { UserService } from "../services/user/user.service.implementation"
 import { prisma } from "./prisma.factory"
 import "./sequelize.factory"
 
-const userRepositoryPrisma = UserRepositoryPrisma.build(prisma)
-export const userServicePrisma = UserService.build(userRepositoryPrisma)
 
 const productRepositoryPrisma = ProductRepositoryPrisma.build(prisma)
-export const productServicePrisma = ProductService.build(productRepositoryPrisma)
-
-const userRepositorySequelize = UserRepositorySequelize.build()
-export const userServiceSequelize = UserService.build(userRepositorySequelize)
-
 const productRepositorySequelize = ProductRepositorySequelize.build()
+export const productServicePrisma = ProductService.build(productRepositoryPrisma)
 export const productServiceSequelize = ProductService.build(productRepositorySequelize)
 
+const userRepositoryPrisma = UserRepositoryPrisma.build(prisma)
+const userRepositorySequelize = UserRepositorySequelize.build()
+export const userServicePrisma = UserService.build(userRepositoryPrisma)
+export const userServiceSequelize = UserService.build(userRepositorySequelize)
+
+export const authServicePrisma = AuthService.build(userRepositoryPrisma)
 export const authServiceSequelize = AuthService.build(userRepositorySequelize)
