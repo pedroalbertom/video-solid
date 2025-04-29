@@ -20,4 +20,4 @@ export const userServiceSequelize = UserService.build(userRepositorySequelize)
 const productRepositorySequelize = ProductRepositorySequelize.build();
 export const productServiceSequelize = ProductService.build(productRepositorySequelize)
 
-export const authService = AuthService.build(userRepositorySequelize)
+export const authServiceSequelize = AuthService.build(userRepositorySequelize)
