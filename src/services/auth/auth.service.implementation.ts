@@ -42,7 +42,7 @@ export class AuthService implements IAuthService {
         }
     }
     public async logout(token: string): Promise<void> {
-        throw new Error("Method not implemented.")
+        return
     }
 
 }

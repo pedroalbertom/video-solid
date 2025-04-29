@@ -3,7 +3,7 @@ import { Request, Response } from "express"
 import { FastifyReply, FastifyRequest } from "fastify"
 import { sendResponse } from "../util/http.functions"
 
-const secret = process.env.JWT_SECRET || "secreta"
+const secret = process.env.JWT_SECRET || "default_secret"
 
 export async function authMiddleware(
     request: Request | FastifyRequest,

@@ -29,6 +29,6 @@ export class AuthController {
 
         await this.service.logout(token)
 
-        sendResponse(response, 204, 'Logout realizado com sucesso!')
+        sendResponse(response, 204, { msg: 'Logout realizado com sucesso!' })
     }
 }

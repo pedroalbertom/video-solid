@@ -1,5 +1,5 @@
 import { Api } from "../api"
-import express, { Express, Request, Response } from 'express'
+import express, { Express, Request, Response, NextFunction } from 'express'
 
 export class ApiExpress implements Api {
 
@@ -11,27 +11,58 @@ export class ApiExpress implements Api {
         return new ApiExpress(app)
     }
 
-    public async addGetRoute(path: string, handle: (req: Request, res: Response) => Promise<void>): Promise<void> {
-        this.app.get(path, handle)
+    public async addGetRoute(
+        path: string,
+        handle: (req: Request, res: Response) => Promise<void>,
+        middleware?: (req: Request, res: Response, next: NextFunction) => void
+    ): Promise<void> {
+        if (middleware) {
+            this.app.get(path, middleware, handle)
+        } else {
+            this.app.get(path, handle)
+        }
     }
 
-    public async addPostRoute(path: string, handle: (req: Request, res: Response) => Promise<void>): Promise<void> {
-        this.app.post(path, handle)
+    public async addPostRoute(
+        path: string,
+        handle: (req: Request, res: Response) => Promise<void>,
+        middleware?: (req: Request, res: Response, next: NextFunction) => void
+    ): Promise<void> {
+        if (middleware) {
+            this.app.post(path, middleware, handle)
+        } else {
+            this.app.post(path, handle)
+        }
     }
 
-    public async addPutRoute(path: string, handle: (req: Request, res: Response) => Promise<void>): Promise<void> {
-        this.app.put(path, handle)
+    public async addPutRoute(
+        path: string,
+        handle: (req: Request, res: Response) => Promise<void>,
+        middleware?: (req: Request, res: Response, next: NextFunction) => void
+    ): Promise<void> {
+        if (middleware) {
+            this.app.put(path, middleware, handle)
+        } else {
+            this.app.put(path, handle)
+        }
     }
 
-    public async addDeleteRoute(path: string, handle: (req: Request, res: Response) => Promise<void>): Promise<void> {
-        this.app.delete(path, handle)
+    public async addDeleteRoute(
+        path: string,
+        handle: (req: Request, res: Response) => Promise<void>,
+        middleware?: (req: Request, res: Response, next: NextFunction) => void
+    ): Promise<void> {
+        if (middleware) {
+            this.app.delete(path, middleware, handle)
+        } else {
+            this.app.delete(path, handle)
+        }
     }
 
     public async start(port: number): Promise<void> {
         try {
             this.app.listen({ port })
             console.log(`🚀 Express server running on port ${port}`)
-            // this.printRoutes()
         } catch (err) {
             console.error("Erro ao iniciar o Express:", err)
             process.exit(1)
@@ -39,13 +70,12 @@ export class ApiExpress implements Api {
     }
 
     private printRoutes() {
-        const routes = this.app.router.stack
-            .filter((route: any) => route.route)
-            .map((route: any) => ({
-                path: route.route.path,
-                method: route.route.stack[0].method
+        const routes = this.app._router.stack
+            .filter((layer: any) => layer.route)
+            .map((layer: any) => ({
+                path: layer.route.path,
+                method: Object.keys(layer.route.methods)[0]
             }))
-
         console.log(routes)
     }
 }

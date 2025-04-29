@@ -9,20 +9,48 @@ export class ApiFastify implements Api {
         return new ApiFastify(app)
     }
 
-    public async addGetRoute(path: string, handle: (req: FastifyRequest, reply: FastifyReply) => Promise<void>): Promise<void> {
-        this.app.get(path, handle)
+    public async addGetRoute(
+        path: string,
+        handle: (req: FastifyRequest, reply: FastifyReply) => Promise<void>,
+        middleware?: (req: FastifyRequest, reply: FastifyReply) => Promise<void>
+    ): Promise<void> {
+        this.app.get(path, {
+            preHandler: middleware,
+            handler: handle
+        })
     }
 
-    public async addPostRoute(path: string, handle: (req: FastifyRequest, reply: FastifyReply) => Promise<void>): Promise<void> {
-        this.app.post(path, handle)
+    public async addPostRoute(
+        path: string,
+        handle: (req: FastifyRequest, reply: FastifyReply) => Promise<void>,
+        middleware?: (req: FastifyRequest, reply: FastifyReply) => Promise<void>
+    ): Promise<void> {
+        this.app.post(path, {
+            preHandler: middleware,
+            handler: handle
+        });
     }
 
-    public async addPutRoute(path: string, handle: (req: FastifyRequest, reply: FastifyReply) => Promise<void>): Promise<void> {
-        this.app.put(path, handle)
+    public async addPutRoute(
+        path: string,
+        handle: (req: FastifyRequest, reply: FastifyReply) => Promise<void>,
+        middleware?: (req: FastifyRequest, reply: FastifyReply) => Promise<void>
+    ): Promise<void> {
+        this.app.put(path, {
+            preHandler: middleware,
+            handler: handle
+        })
     }
 
-    public async addDeleteRoute(path: string, handle: (req: FastifyRequest, reply: FastifyReply) => Promise<void>): Promise<void> {
-        this.app.delete(path, handle)
+    public async addDeleteRoute(
+        path: string,
+        handle: (req: FastifyRequest, reply: FastifyReply) => Promise<void>,
+        middleware?: (req: FastifyRequest, reply: FastifyReply) => Promise<void>
+    ): Promise<void> {
+        this.app.delete(path, {
+            preHandler: middleware,
+            handler: handle
+        })
     }
 
     public async start(port: number): Promise<void> {
