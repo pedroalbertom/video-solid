@@ -11,6 +11,10 @@ export class AuthService implements IAuthService {
         private jwtSecret: string = process.env.JWT_SECRET || 'default_secret'
     ) { }
 
+    public static build(userRepository: IUserRepository) {
+        return new AuthService(userRepository)
+    }
+
     public async login(data: LoginInputDto): Promise<LoginOutputDto> {
         const user = await this.userRepository.findByEmail(data.email)
 
