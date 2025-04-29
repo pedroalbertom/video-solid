@@ -11,12 +11,12 @@ async function registerProductRoutes(api: Api, controller: IProductController) {
     await api.addGetRoute("/products", controller.list.bind(controller))
 }
 
+const controller = ProductController.build()
+
 export async function registerProductRoutesExpress(api: ApiExpress) {
-    const controller = ProductController.build()
     await registerProductRoutes(api, controller)
 }
 
 export async function registerProductRoutesFastify(api: ApiFastify) {
-    const controller = ProductController.build()
     await registerProductRoutes(api, controller)
 }

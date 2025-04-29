@@ -11,12 +11,12 @@ async function registerUserRoutes(api: Api, controller: IUserController) {
     await api.addDeleteRoute("/users/:id", controller.delete.bind(controller))
 }
 
+const controller = UserController.build()
+
 export async function registerUserRoutesExpress(api: ApiExpress) {
-    const controller = UserController.build()
     await registerUserRoutes(api, controller)
 }
 
 export async function registerUserRoutesFastify(api: ApiFastify) {
-    const controller = UserController.build()
     await registerUserRoutes(api, controller)
 }
